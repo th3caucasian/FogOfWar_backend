@@ -10,7 +10,7 @@ object UserData: Table("user_data") {
     val id = long("id").autoIncrement()
     private val login = varchar("login", 25).uniqueIndex("UI_UserModel_login").nullable()
     private val password = varchar("password", 50)
-    private val phoneNumber = varchar("phone_number", 15).uniqueIndex("UI_user_data_phone_number")
+    val phoneNumber = varchar("phone_number", 15).uniqueIndex("UI_user_data_phone_number")
     private val clearedPoints = registerColumn("cleared_points", PointArrayColumnType()).nullable()
 
     override val primaryKey = PrimaryKey(id, name = "PK_user_data")

@@ -1,17 +1,11 @@
-package com.example.features.add_marker
+package com.example.features.change_marker_group_privacy
 
-import com.example.database.column_types.Point
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AddMarkerReceiveRemote(
-    val phoneNumber: String,
-    val markerLocation: Point,
-    val description: String
+data class ChangeMarkerGroupPrivacyReceiveRemote(
+    val markerGroupId: Long,
+    val privacy: Boolean
 )
 
-@Serializable
-data class AddMarkerResponseRemote(
-    val markerId: Long
-)
 

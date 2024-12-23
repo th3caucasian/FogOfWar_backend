@@ -1,13 +1,13 @@
-package com.example.features.add_marker_group
+package com.example.features.share_marker_group
 
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
 
-fun Application.configureAddMarkerGroupRouting() {
+fun Application.configureShareMarkerGroupRouting() {
     routing {
-        post("/marker-group/add") {
-            val addMarkerGroupController = AddMarkerGroupController(call)
-            addMarkerGroupController.addMarkerGroup()
+        post("/marker-group/share") {
+            val shareMarkerGroupController = ShareMarkerGroupController(call)
+            shareMarkerGroupController.shareMarkerGroup()
         }
     }
 }

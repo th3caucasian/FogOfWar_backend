@@ -1,13 +1,13 @@
-package com.example.features.add_marker
+package com.example.features.change_marker_group_privacy
 
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
 
-fun Application.configureAddMarkerRouting() {
+fun Application.configureChangeMarkerGroupPrivacyRouting() {
     routing {
-        post("/markers/add") {
-            val addMarkerController = AddMarkerController(call)
-            addMarkerController.addMarker()
+        post("/marker-group/change-privacy") {
+            val changeMarkerGroupPrivacyController = ChangeMarkerGroupPrivacyController(call)
+            changeMarkerGroupPrivacyController.changeMarkerGroupPrivacy()
         }
     }
 }

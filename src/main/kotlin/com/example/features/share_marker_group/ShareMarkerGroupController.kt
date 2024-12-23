@@ -1,7 +1,6 @@
-package com.example.features.add_marker_group
+package com.example.features.share_marker_group
 
-import com.example.database.columns.marker_group.MarkerGroup
-import com.example.database.columns.marker_group.MarkerGroupDTO
+
 import com.example.database.columns.marker_group_user_data.MarkerGroupUserData
 import com.example.database.columns.marker_group_user_data.MarkerGroupUserDataDTO
 import com.example.database.columns.user_data.UserData
@@ -10,28 +9,18 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 
-class AddMarkerGroupController(private val call: ApplicationCall) {
+class ShareMarkerGroupController(private val call: ApplicationCall) {
 
-    suspend fun addMarkerGroup() {
+    suspend fun shareMarkerGroup() {
 
         try {
-            val addMarkerGroupReceiveRemote = call.receive<AddMarkerGroupReceiveRemote>()
+            val shareMarkerGroupReceiveRemote = call.receive<ShareMarkerGroupReceiveRemote>()
 
-            val currentUserId = UserData.fetchUserByNumber(addMarkerGroupReceiveRemote.phoneNumber).id!!
-
-            val currentGroupId = MarkerGroup.insert(
-                MarkerGroupDTO(
-                    id = null,
-                    userId = currentUserId,
-                    name = addMarkerGroupReceiveRemote.name,
-                    description = addMarkerGroupReceiveRemote.description,
-                    privacy = addMarkerGroupReceiveRemote.privacy
-                )
-            )
+            val currentUserId = UserData.fetchUserByNumber(shareMarkerGroupReceiveRemote.phoneNumber).id!!
 
             MarkerGroupUserData.insert(
                 MarkerGroupUserDataDTO(
-                    groupId = currentGroupId,
+                    groupId = shareMarkerGroupReceiveRemote.markerGroupId,
                     userId = currentUserId
                 )
             )

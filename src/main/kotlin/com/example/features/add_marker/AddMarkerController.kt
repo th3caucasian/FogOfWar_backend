@@ -15,14 +15,14 @@ class AddMarkerController(private val call: ApplicationCall) {
     suspend fun addMarker() {
 
         try {
-            val saveMarkerReceiveRemote = call.receive<AddMarkerReceiveRemote>()
+            val addMarkerReceiveRemote = call.receive<AddMarkerReceiveRemote>()
 
-            val currentUserId = UserData.fetchUserByNumber(saveMarkerReceiveRemote.phoneNumber).id!!
+            val currentUserId = UserData.fetchUserByNumber(addMarkerReceiveRemote.phoneNumber).id!!
 
             val markerId = Marker.insert(MarkerDTO(
                 id = null,
-                location = saveMarkerReceiveRemote.markerLocation,
-                description = saveMarkerReceiveRemote.description
+                location = addMarkerReceiveRemote.markerLocation,
+                description = addMarkerReceiveRemote.description
             ))
 
             MarkerUserData.insert(

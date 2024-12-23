@@ -1,11 +1,22 @@
 package com.example
 
+import com.example.features.add_friend.configureAddFriendRouting
 import com.example.features.add_marker.configureAddMarkerRouting
+import com.example.features.add_marker_group.configureAddMarkerGroupRouting
+import com.example.features.add_marker_to_group.configureAddMarkerToGroupRouting
+import com.example.features.change_marker_group_name.configureChangeMarkerGroupNameRouting
+import com.example.features.change_marker_group_privacy.configureChangeMarkerGroupPrivacyRouting
+import com.example.features.delete_friend.configureDeleteFriendRouting
 import com.example.features.delete_marker.configureDeleteMarkerRouting
+import com.example.features.delete_marker_group.configureDeleteMarkerGroupRouting
+import com.example.features.get_friends.configureGetFriendsRouting
+import com.example.features.get_marker_groups.configureGetMarkerGroupsRouting
 import com.example.features.get_markers.configureGetMarkerRouting
 import com.example.features.get_points.configureGetPointsRouting
+import com.example.features.get_user.configureGetUserRouting
 import com.example.features.login.configureLoginRouting
 import com.example.features.registration.configureRegisterRouting
+import com.example.features.share_marker_group.configureShareMarkerGroupRouting
 import com.example.features.update_points.configureUpdatePointsRouting
 import com.example.plugins.configureRouting
 import com.example.plugins.configureSerialization
@@ -32,6 +43,18 @@ fun Application.module() {
     configureGetMarkerRouting()
     configureAddMarkerRouting()
     configureDeleteMarkerRouting()
+    configureAddMarkerGroupRouting()
+    configureShareMarkerGroupRouting()
+    configureAddMarkerToGroupRouting()
+    configureChangeMarkerGroupPrivacyRouting()
+    configureAddFriendRouting()
+    configureGetUserRouting()
+    configureGetFriendsRouting()
+    configureGetMarkerGroupsRouting()
+    configureDeleteMarkerGroupRouting()
+    configureDeleteFriendRouting()
+    configureChangeMarkerGroupNameRouting()
+
 }
 
 fun readDBInfo(fileName: String): List<String> {

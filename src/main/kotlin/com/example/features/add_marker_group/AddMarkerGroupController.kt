@@ -1,38 +1,44 @@
-package com.example.features.add_marker
+package com.example.features.add_marker_group
 
-import com.example.database.columns.marker.Marker
-import com.example.database.columns.marker.MarkerDTO
-import com.example.database.columns.marker_user_data.MarkerUserData
-import com.example.database.columns.marker_user_data.MarkerUserDataDTO
+import com.example.database.columns.marker_group.MarkerGroup
+import com.example.database.columns.marker_group.MarkerGroupDTO
+import com.example.database.columns.marker_group_user_data.MarkerGroupUserData
+import com.example.database.columns.marker_group_user_data.MarkerGroupUserDataDTO
 import com.example.database.columns.user_data.UserData
+import com.example.features.add_marker.AddMarkerResponseRemote
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 
-class AddMarkerController(private val call: ApplicationCall) {
+class AddMarkerGroupController(private val call: ApplicationCall) {
 
-    suspend fun addMarker() {
+    suspend fun addMarkerGroup() {
 
         try {
-            val addMarkerReceiveRemote = call.receive<AddMarkerReceiveRemote>()
+            val addMarkerGroupReceiveRemote = call.receive<AddMarkerGroupReceiveRemote>()
 
-            val currentUserId = UserData.fetchUserByNumber(addMarkerReceiveRemote.phoneNumber).id!!
+            val currentUserId = UserData.fetchUserByNumber(addMarkerGroupReceiveRemote.phoneNumber).id!!
 
-            val markerId = Marker.insert(MarkerDTO(
-                id = null,
-                location = addMarkerReceiveRemote.markerLocation,
-                description = addMarkerReceiveRemote.description
-            ))
+            val currentGroupId = MarkerGroup.insert(
+                MarkerGroupDTO(
+                    id = null,
+                    userId = currentUserId,
+                    name = addMarkerGroupReceiveRemote.name,
+                    description = addMarkerGroupReceiveRemote.description,
+                    privacy = addMarkerGroupReceiveRemote.privacy
+                )
+            )
 
-            MarkerUserData.insert(
-                MarkerUserDataDTO(
-                    markerId = markerId,
+            MarkerGroupUserData.insert(
+                MarkerGroupUserDataDTO(
+                    groupId = currentGroupId,
                     userId = currentUserId
                 )
             )
 
-            call.respond(AddMarkerResponseRemote(markerId))
+            call.respond(AddMarkerResponseRemote(currentUserId))
+
         }
         catch (e: Exception) {
             e.printStackTrace()
