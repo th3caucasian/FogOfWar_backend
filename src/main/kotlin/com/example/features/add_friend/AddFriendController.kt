@@ -25,6 +25,7 @@ class AddFriendController(private val call: ApplicationCall) {
                 friendId = userIdToAdd
                 )
             )
+            call.respond(HttpStatusCode.OK)
         }
         catch (e: Exception) {
             e.printStackTrace()

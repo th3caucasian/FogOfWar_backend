@@ -24,7 +24,7 @@ class ShareMarkerGroupController(private val call: ApplicationCall) {
                     userId = currentUserId
                 )
             )
-
+            call.respond(HttpStatusCode.OK)
         }
         catch (e: Exception) {
             e.printStackTrace()

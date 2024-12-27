@@ -21,7 +21,7 @@ class AddMarkerToGroupController(private val call: ApplicationCall) {
                     markerId = addMarkerToGroupReceiveRemote.markerId
                 )
             )
-
+            call.respond(HttpStatusCode.OK)
         }
         catch (e: Exception) {
             e.printStackTrace()

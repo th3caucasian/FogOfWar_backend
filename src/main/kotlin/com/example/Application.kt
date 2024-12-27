@@ -8,8 +8,10 @@ import com.example.features.change_marker_group_name.configureChangeMarkerGroupN
 import com.example.features.change_marker_group_privacy.configureChangeMarkerGroupPrivacyRouting
 import com.example.features.delete_friend.configureDeleteFriendRouting
 import com.example.features.delete_marker.configureDeleteMarkerRouting
+import com.example.features.delete_marker_from_group.configureDeleteMarkerFromGroupRouting
 import com.example.features.delete_marker_group.configureDeleteMarkerGroupRouting
 import com.example.features.get_friends.configureGetFriendsRouting
+import com.example.features.get_groups_of_marker.configureGetGroupsOfMarkerRouting
 import com.example.features.get_marker_groups.configureGetMarkerGroupsRouting
 import com.example.features.get_markers.configureGetMarkerRouting
 import com.example.features.get_points.configureGetPointsRouting
@@ -54,6 +56,8 @@ fun Application.module() {
     configureDeleteMarkerGroupRouting()
     configureDeleteFriendRouting()
     configureChangeMarkerGroupNameRouting()
+    configureGetGroupsOfMarkerRouting()
+    configureDeleteMarkerFromGroupRouting()
 
 }
 

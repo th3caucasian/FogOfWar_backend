@@ -22,6 +22,8 @@ class DeleteMarkerController(private val call: ApplicationCall) {
             MarkerUserData.delete(deleteMarkerReceiveRemote.markerId, currentUserId)
             Marker.delete(deleteMarkerReceiveRemote.markerId)
 
+            call.respond(HttpStatusCode.OK)
+
         }
         catch (e: Exception) {
             e.printStackTrace()

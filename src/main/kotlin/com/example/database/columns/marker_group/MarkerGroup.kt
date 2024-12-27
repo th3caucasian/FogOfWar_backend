@@ -1,6 +1,7 @@
 package com.example.database.columns.marker_group
 
 import com.example.database.columns.marker.Marker
+import com.example.database.columns.marker_group_marker.MarkerGroupMarker
 import com.example.database.columns.marker_group_user_data.MarkerGroupUserData
 import com.example.database.columns.marker_user_data.MarkerUserData
 import com.example.database.columns.user_data.UserData
@@ -33,6 +34,7 @@ object MarkerGroup: Table("marker_group") {
             val groupOwnerId = MarkerGroup.selectAll().where {MarkerGroup.id eq currentMarkerGroupId}.single()[userId]
             if (groupOwnerId == currentUserId) {
                 MarkerGroupUserData.deleteWhere { MarkerGroupUserData.groupId eq currentMarkerGroupId }
+                MarkerGroup.deleteWhere { (MarkerGroup.userId eq groupOwnerId) and (MarkerGroup.id eq currentMarkerGroupId) }
             }
             else {
                 MarkerGroupUserData.deleteWhere { (MarkerGroupUserData.groupId eq currentMarkerGroupId) and (MarkerGroupUserData.userId eq currentUserId)}
@@ -66,6 +68,16 @@ object MarkerGroup: Table("marker_group") {
     fun changeName(markerGroupId: Long, name: String) {
         transaction {
             MarkerGroup.update({ MarkerGroup.id eq markerGroupId }) { it[MarkerGroup.name] = name }
+        }
+    }
+
+    fun getGroupsOfMarker(currentMarkerId: Long): List<String> {
+        return transaction {
+            val groupsOfMarker = mutableListOf<String>()
+            MarkerGroup
+                .innerJoin(MarkerGroupMarker, { MarkerGroup.id }, { MarkerGroupMarker.groupId })
+                .selectAll().where { MarkerGroupMarker.markerId eq currentMarkerId }
+                .map { it[MarkerGroup.name] }
         }
     }
 

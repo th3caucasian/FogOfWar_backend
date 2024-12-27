@@ -14,6 +14,8 @@ class ChangeMarkerGroupPrivacyController(private val call: ApplicationCall) {
             val changeMarkerGroupPrivacyReceiveRemote = call.receive<ChangeMarkerGroupPrivacyReceiveRemote>()
 
             MarkerGroup.changePrivacy(changeMarkerGroupPrivacyReceiveRemote.markerGroupId, changeMarkerGroupPrivacyReceiveRemote.privacy)
+
+            call.respond(HttpStatusCode.OK)
         }
         catch (e: Exception) {
             e.printStackTrace()

@@ -19,7 +19,7 @@ class DeleteMarkerGroupController(private val call: ApplicationCall) {
             val currentUserId = UserData.fetchUserByNumber(deleteMarkerGroupReceiveRemote.phoneNumber).id!!
 
             MarkerGroup.delete(deleteMarkerGroupReceiveRemote.markerGroupId, currentUserId)
-
+            call.respond(HttpStatusCode.OK)
         }
         catch (e: Exception) {
             e.printStackTrace()

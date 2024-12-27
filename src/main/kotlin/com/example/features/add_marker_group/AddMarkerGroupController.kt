@@ -37,7 +37,7 @@ class AddMarkerGroupController(private val call: ApplicationCall) {
                 )
             )
 
-            call.respond(AddMarkerResponseRemote(currentUserId))
+            call.respond(AddMarkerGroupResponseRemote(currentGroupId))
 
         }
         catch (e: Exception) {

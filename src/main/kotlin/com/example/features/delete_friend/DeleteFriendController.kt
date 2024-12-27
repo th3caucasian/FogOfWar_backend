@@ -16,11 +16,12 @@ class DeleteFriendController(private val call: ApplicationCall) {
         try {
             val deleteFriendReceiveRemote = call.receive<DeleteFriendReceiveRemote>()
 
-            val currentUserId = UserData.fetchUserByNumber(deleteFriendReceiveRemote.phoneNumber).id!!
-            val currentFriendId = UserData.fetchUserByNumber(deleteFriendReceiveRemote.phoneNumber).id!!
+            val currentUserId = UserData.fetchUserByNumber(deleteFriendReceiveRemote.userNumber).id!!
+            val currentFriendId = UserData.fetchUserByNumber(deleteFriendReceiveRemote.friendNumber).id!!
 
             Friend.delete(currentUserId, currentFriendId)
 
+            call.respond(HttpStatusCode.OK)
         }
         catch (e: Exception) {
             e.printStackTrace()

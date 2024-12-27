@@ -11,7 +11,7 @@ data class AddMarkerGroupReceiveRemote(
 )
 
 @Serializable
-data class AddMarkerGroupRespondRemote(
+data class AddMarkerGroupResponseRemote(
     val groupId: Long
 )
 

@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DeleteFriendReceiveRemote(
-    val phoneNumber: String,
-    val friendNumber: Long
+    val userNumber: String,
+    val friendNumber: String
 )

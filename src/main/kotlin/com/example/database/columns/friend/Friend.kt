@@ -24,7 +24,8 @@ object Friend: Table("friend") {
 
     fun delete(currentUserId: Long, currentFriendId: Long) {
         transaction {
-            Friend.deleteWhere { ((Friend.userId eq currentUserId) and (Friend.friendId eq currentFriendId)) and  ((Friend.friendId eq currentUserId) and (Friend.userId eq currentFriendId))}
+            Friend.deleteWhere { (Friend.userId eq currentUserId) and (Friend.friendId eq currentFriendId) }
+            Friend.deleteWhere { (Friend.friendId eq currentUserId) and (Friend.userId eq currentFriendId) }
         }
     }
 

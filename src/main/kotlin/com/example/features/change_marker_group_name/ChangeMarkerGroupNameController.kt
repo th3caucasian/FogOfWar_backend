@@ -8,12 +8,13 @@ import io.ktor.server.response.*
 
 class ChangeMarkerGroupNameController(private val call: ApplicationCall) {
 
-    suspend fun changeMarkerGroupPrivacy() {
+    suspend fun changeMarkerGroupName() {
 
         try {
             val changeMarkerGroupNameReceiveRemote = call.receive<ChangeMarkerGroupNameReceiveRemote>()
 
             MarkerGroup.changeName(changeMarkerGroupNameReceiveRemote.markerGroupId, changeMarkerGroupNameReceiveRemote.name)
+            call.respond(HttpStatusCode.OK)
         }
         catch (e: Exception) {
             e.printStackTrace()
