@@ -20,12 +20,12 @@ class RegisterController(private val call: ApplicationCall) {
             call.respond(HttpStatusCode.BadRequest, "Invalid phone number")
 
 
-        val userDTO = UserData.fetchUserByNumber(registerReceiveRemote.phoneNumber)
-
-        if (userDTO != null) {
+        try {
+            val userDTO = UserData.fetchUserByNumber(registerReceiveRemote.phoneNumber)
             call.respond(HttpStatusCode.Conflict, "User already exists")
+
         }
-        else {
+        catch (e: Exception) {
             UserData.insert(
                 UserDTO(
                     id = null,
@@ -46,5 +46,6 @@ class RegisterController(private val call: ApplicationCall) {
             )
             call.respond(RegisterResponseRemote(token=token))
         }
+
     }
 }
